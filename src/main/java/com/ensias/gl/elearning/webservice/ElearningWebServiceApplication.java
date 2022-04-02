@@ -1,7 +1,8 @@
 package com.ensias.gl.elearning.webservice;
 
-import com.ensias.gl.elearning.dao.CourseRepository;
-import com.ensias.gl.elearning.entities.Course;
+import com.ensias.gl.elearning.webservice.dao.CourseRepository;
+import com.ensias.gl.elearning.webservice.entities.Course;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

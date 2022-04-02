@@ -1,4 +1,4 @@
-package com.ensias.gl.elearning.entities;
+package com.ensias.gl.elearning.webservice.entities;
 
 import java.io.Serializable;
 import java.util.Date;

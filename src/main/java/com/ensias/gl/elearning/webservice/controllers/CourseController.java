@@ -1,7 +1,8 @@
-package com.ensias.gl.elearning.controllers;
+package com.ensias.gl.elearning.webservice.controllers;
 
-import com.ensias.gl.elearning.dao.CourseRepository;
-import com.ensias.gl.elearning.entities.Course;
+import com.ensias.gl.elearning.webservice.dao.CourseRepository;
+import com.ensias.gl.elearning.webservice.entities.Course;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -12,13 +13,13 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("Courses/*")
+@RequestMapping("/Courses/*")
 public class CourseController {
     @Autowired
     CourseRepository courseRepository ;
 
 
-    @PostMapping
+    @PostMapping(path="/course")
     public ResponseEntity addCourse(@RequestBody Course course) {
         courseRepository.save(course);
         //test si course existe
@@ -26,7 +27,7 @@ public class CourseController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("{idCourse}")
+    @DeleteMapping("/course/{idCourse}")
     public ResponseEntity removeCourse(@PathVariable Long idCourse) {
         courseRepository.deleteById(idCourse);
         // test if existe
