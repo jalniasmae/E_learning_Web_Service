@@ -26,13 +26,13 @@ public class ElearningWebServiceApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		restConfiguration.exposeIdsFor(Course.class);
 
-
-		Stream.of(
-				new Course(null,"java",2,"2",new Date(),4),
-				new Course(null,"java script",2,"2",new Date(),4),
-				new Course(null,"php",2,"2",new Date(),4)
-
-				).forEach(c->courseRepository.save(c));
+    //
+    //		Stream.of(
+    //				new Course(null,"java",2,"2",new Date(),4),
+    //				new Course(null,"java script",2,"2",new Date(),4),
+    //				new Course(null,"php",2,"2",new Date(),4)
+    //
+    //				).forEach(c->courseRepository.save(c));
 
 	}
 }

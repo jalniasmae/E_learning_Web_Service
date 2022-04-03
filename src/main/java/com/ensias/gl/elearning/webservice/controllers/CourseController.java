@@ -11,18 +11,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
-@RequestMapping("/Courses/*")
+@RequestMapping("/courses/*")
 public class CourseController {
+
     @Autowired
-    CourseRepository courseRepository ;
+    CourseRepository courseRepository;
 
-
-    @PostMapping(path="/course")
+    @PostMapping(path = "/course")
     public ResponseEntity addCourse(@RequestBody Course course) {
         courseRepository.save(course);
-        //test si course existe
+        // test si course existe
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
@@ -31,28 +30,23 @@ public class CourseController {
     public ResponseEntity removeCourse(@PathVariable Long idCourse) {
         courseRepository.deleteById(idCourse);
         // test if existe
-        return  new ResponseEntity(HttpStatus.GONE);
+        return new ResponseEntity(HttpStatus.GONE);
     }
 
-    @PostMapping
-    public ResponseEntity<Course> getCourse(@RequestBody String nomCourse) {
+    @GetMapping("/course/{nomCourse}")
+    public ResponseEntity<Course> getCourse(@PathVariable(value="nomCourse")  String nomCourse) {
 
-       Course course= courseRepository.findByNomCourse(nomCourse);
-       //test if null
-        return new ResponseEntity<Course>(course,HttpStatus.FOUND);
+        Course course = courseRepository.findByNomCourse(nomCourse);
+        // test if null
+        return new ResponseEntity<Course>(course, HttpStatus.FOUND);
     }
-
-
 
     @GetMapping
     public ResponseEntity getCourses() {
 
+        List<Course> courses = courseRepository.findAll();
 
-        List<Course> courses =courseRepository.findAll();
-
-
-
-        return new ResponseEntity<List>(courses,HttpStatus.FOUND);
+        return new ResponseEntity<List>(courses, HttpStatus.FOUND);
     }
 
 }
