@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="*")
 @RequestMapping("/courses/*")
 public class CourseController {
 
@@ -27,10 +28,10 @@ public class CourseController {
     }
 
     @DeleteMapping("/course/{idCourse}")
-    public ResponseEntity removeCourse(@PathVariable Long idCourse) {
+    public ResponseEntity<Boolean> removeCourse(@PathVariable Long idCourse) {
         courseRepository.deleteById(idCourse);
         // test if existe
-        return new ResponseEntity(HttpStatus.GONE);
+        return new ResponseEntity(true,HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/course/{nomCourse}")
@@ -41,8 +42,8 @@ public class CourseController {
         return new ResponseEntity<Course>(course, HttpStatus.FOUND);
     }
 
-    @GetMapping
-    public ResponseEntity getCourses() {
+    @GetMapping("/all")
+    public ResponseEntity<List> getCourses() {
 
         List<Course> courses = courseRepository.findAll();
 
