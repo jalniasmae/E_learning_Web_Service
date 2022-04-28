@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -48,6 +49,23 @@ public class CourseController {
         List<Course> courses = courseRepository.findAll();
 
         return new ResponseEntity<List>(courses, HttpStatus.FOUND);
+    }
+    
+    @PutMapping(path = "/update/course")
+    public ResponseEntity updateCourse(@RequestBody Course course) {
+        Long idCourse = course.getId();
+        //
+        if(null != idCourse) {
+            Optional<Course>  savedCourse= courseRepository.findById(idCourse);
+            if(savedCourse.isPresent()) {
+                courseRepository.save(course);
+            } else {
+               throw new RuntimeException("Id Course not exist");
+ 
+            }
+        }
+
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
 }
